@@ -139,7 +139,7 @@
 
 		this.$itemList.css({
 			left: offset.left + pos.left,
-			top: offset.top + pos.top
+			bottom: $(window).height() - (offset.top + pos.top)
 		});
 	};
 
