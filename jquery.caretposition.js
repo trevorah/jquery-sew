@@ -37,19 +37,6 @@ $(function() {
 		getCaretPosition: function() {
 			var cal = calculator, self = this, element = self[0], elementOffset = self.offset();
 
-			// IE has easy way to get caret offset position
-			if ($.browser.msie && $.browser.version <= 9) {
-				// must get focus first
-				element.focus();
-			    var range = document.selection.createRange();
-			    $('#hskeywords').val(element.scrollTop);
-			    return {
-			        left: range.boundingLeft - elementOffset.left,
-			        top: parseInt(range.boundingTop) - elementOffset.top + element.scrollTop
-						+ document.documentElement.scrollTop + parseInt(self.getComputedStyle("fontSize"))
-			    };
-			}
-
 			cal.simulator.empty();
 			// clone primary styles to imitate textarea
 			$.each(cal.primaryStyles, function(index, styleName) {
@@ -76,7 +63,7 @@ $(function() {
 			return {
 				top: focusOffset.top - simulatorOffset.top - element.scrollTop
 					// calculate and add the font height except Firefox
-					+ ($.browser.mozilla ? 0 : parseInt(self.getComputedStyle("fontSize"))),
+					+ (parseInt(self.getComputedStyle("fontSize"))),
 				left: focus[0].offsetLeft -  cal.simulator[0].offsetLeft - element.scrollLeft
 			};
 		}
